@@ -1,7 +1,10 @@
-<h1>Ticket for {{issuedticket.ticket_type.campaign.title}}</h1>
+<h1>Payment confirmation for {{issuedticket.ticket_type.campaign.title}}</h1>
 <ul>
     <li><b>{{issuedticket.uid}}</b></li>
     <li>Campaign: {{issuedticket.ticket_type.campaign.title}}</li>
+    <li>Description: {{issuedticket.ticket_type.campaign.description|safe}}</li>
     <li>Type: {{issuedticket.ticket_type.type}}</li>
-    <li>Cost: {{issuedticket.ticket_type.cost}} UAH</li>
+    <li>Donated: UAH {{issuedticket.ticket_type.cost}}.</li>
 </ul>
+
+<h2>Thank you!</h2>

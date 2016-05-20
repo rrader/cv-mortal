@@ -1,9 +1,12 @@
 header {
   border-bottom: 1px solid #ccc;
   height: 50px; }
-  header img {
+  header .title {
     margin-top: 6px;
-    margin-left: 20px; }
+    margin-left: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    }
 
 #content {
   max-width: 900px;

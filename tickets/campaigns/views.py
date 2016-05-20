@@ -28,6 +28,11 @@ class TicketTypeListView(ListView):
         campaign = Campaign.objects.get(slug=self.kwargs['campaign_slug'])
         return TicketType.objects.filter(campaign=campaign)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({'campaign': Campaign.objects.get(slug=self.kwargs['campaign_slug'])})
+        return context
+
 
 class BuyTicketView(View):
     def post(self, request, *args, **kwargs):

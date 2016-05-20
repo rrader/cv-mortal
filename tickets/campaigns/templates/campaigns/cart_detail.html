@@ -1,28 +1,26 @@
 {% extends "campaigns/base.html" %}
 {% load staticfiles %}
-{%block title %} TedX - Корзина {% endblock %}
+{%block title %} {{ cart.ticket_type.campaign.title }} - Cart {% endblock %}
 {% block content %}
-<h1>Кошик</h1>
+<h1>Cart</h1>
 <div class="col col-xs-12 ticket">
                 <div class="row">
                     <div class="col col-xs-6 ">
                         <h3><b>{{cart.ticket_type.type}}</b></h3>
-                        <h5><b>Актова зала КПІ</b></h5>
-                        <p>Опис події(слоган події)</p>
-                        <img src="{% static 'pic/cv_db.svg' %}" />
+                        <h5><b>{{ cart.ticket_type.campaign.title }}</b></h5>
+                        <p>{{ cart.ticket_type.campaign.description }}</p>
+                        <img src="{{ cart.ticket_type.campaign.image }}" style="height:100px" />
                     </div>
                     <div class="col col-xs-2 ticket-info">
-                        <p>Дата: 08.05.2016</p>
-                        <p>Початок: 18:00</p>
-                        <p>Ціна: {{cart.ticket_type.cost}} грн.</p>
-<p>Статус: {%if cart.status == 'CREATED'%}
+                        <p>UAH {{cart.ticket_type.cost}}.</p>
+<p>Status: {%if cart.status == 'CREATED'%}
         Payment is not completed.
     {%endif%}
     {%if cart.status == 'PAYMENT_FAILED'%}
         Payment failed.
     {%endif%}
     {%if cart.status == 'TICKET_ISSUED'%}
-        Оплату підтвердженно!
+        Payment confirmed!
     {%endif%}</p>
                     </div>
                     <div class="col col-xs-4">
@@ -31,7 +29,7 @@
 {{liqpay_form|safe}}</div>
 {%endif%}
 {%if cart.status == 'TICKET_ISSUED'%}
-        <a class="icon-ticket-success" href="{{ cart.ticket.get_absolute_url }}" rel="nofollow"></a>
+        <a class="btn btn-primary" href="{{ cart.ticket.get_absolute_url }}" rel="nofollow">Show payment confirmation</a>
 {%endif%}
                     </div>
                 </div>

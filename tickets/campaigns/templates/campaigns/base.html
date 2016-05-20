@@ -4,7 +4,7 @@
 <head>
     {% load staticfiles %}
     <meta charset="utf-8">
-    <title>{% block title %}TEDxKPI Tickets{% endblock %}</title>
+    <title>{% block title %}Crowdfunding{% endblock %}</title>
  <link rel="stylesheet" href="{% static "css/layout.css" %}" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -14,7 +14,7 @@
 
 <body>
     <header>
-        <img src="{% static "pic/cv_db.svg" %}" alt="TEDxKPI" />
+        <span class="title"><a href="{% url 'root' %}">Crowdfunding</a></span>
     </header>
     <div class="container" id="content">
 	{% block content %}<h2>Tickets</h2>{% endblock %}

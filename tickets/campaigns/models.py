@@ -3,8 +3,11 @@ from django.db import models
 class Campaign(models.Model):
     title = models.CharField(max_length=200)
     slug = models.CharField(max_length=50)
+    image = models.URLField(null=True)
+    description = models.TextField(default="")
     opened = models.BooleanField(default=False)
     sandbox = models.BooleanField(default=True)
+    goal = models.DecimalField(max_digits=8, decimal_places=2, default=0)
 
     def __str__(self):
         return '{} [{}]'.format(self.title, 'opened' if self.opened else 'closed')
@@ -12,6 +15,11 @@ class Campaign(models.Model):
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('campaign-details', args=[self.slug])
+
+    def collected(self):
+        collected = sum(cart.ticket_type.cost
+                        for cart in Cart.objects.filter(status=Cart.TICKET_ISSUED, ticket_type__campaign=self))
+        return collected
 
 
 class TicketType(models.Model):

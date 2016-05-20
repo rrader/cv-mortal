@@ -1,38 +1,32 @@
 {% extends "campaigns/base.html" %}
 {% load staticfiles %}
-{%block title %} TedX {% endblock %}
+{%block title %} {{campaign.title}} {% endblock %}
 {% block content %}
-<h1>Квитки</h1>
+<h1>Choose your donation :)</h1>
 <div class="row">
  {% for tickettype in object_list %}
 <div class="col col-xs-12 ticket">
                 <div class="row">
                     <div class="col col-xs-6 ">
                         <h3><b>{{tickettype.type}}</b></h3>
-                        <h5><b>Актова зала КПІ</b></h5>
-                        <p>Опис події(слоган події)</p>
-                        <img src="{% static 'pic/logo.png' %}" />
+                        <h5><b>{{tickettype.campaign.title}}</b></h5>
+                        <p>{{tickettype.campaign.description|safe}}</p>
+                        {% if tickettype.campaign.image %}
+                            <img style="height: 100px;" src="{{tickettype.campaign.image}}" />
+                        {% endif %}
                     </div>
                     <div class="col col-xs-2 ticket-info">
-                        <p>Дата: 08.05.2016</p>
-                        <p>Початок: 18:00</p>
-                        <p>Ціна: {{tickettype.cost}} грн.</p>
+                        <p>UAH {{tickettype.cost}}.</p>
                     </div>
                     <div class="col col-xs-4">
 <form action="{% url 'buy-ticket' tickettype.campaign.slug tickettype.id %}" method="POST" name="buy">
  {% csrf_token %}
-                        <button class="icon-ticket" type="submit"></button>
-
+                        <button class="btn btn-primary" type="submit">Donate</button>
 </form>
                     </div>
                 </div>
             </div>
 
-
-
-
-
-	
    {% empty %}
     <h2>No ticket types available.</h2>
 
