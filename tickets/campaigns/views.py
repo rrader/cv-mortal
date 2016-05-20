@@ -46,7 +46,7 @@ class TicketTypeListView(ListView, FormMixin):
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        return TicketType.objects.filter(campaign=self.campaign)
+        return TicketType.objects.filter(campaign=self.campaign).order_by('cost')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
