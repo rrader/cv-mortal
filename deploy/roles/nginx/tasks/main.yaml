@@ -1,0 +1,11 @@
+- name: Install NGINX
+  apt: name=nginx state=present
+
+- name: Nginx config for cvmortal
+  template: 'src=cvmortal.nginx dest=/etc/nginx/sites-available/cvmortal mode=0644'
+
+- file: 'src="/etc/nginx/sites-available/cvmortal" dest="/etc/nginx/sites-enabled/cvmortal" state=link force=yes'
+
+- file: 'dest="/etc/nginx/sites-enabled/default" state=absent'
+
+- service: 'name=nginx state=restarted'

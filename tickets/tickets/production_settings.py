@@ -1,6 +1,6 @@
 DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1', 'tickets.itkpi.pp.ua']
-STATIC_ROOT = '/home/tickets/static'
+ALLOWED_HOSTS = ['127.0.0.1', '188.166.35.178', 'cvmortal.itkpi.pp.ua']
+STATIC_ROOT = '/home/cvmortal/static'
 
 LOGGING = {
     'version': 1,

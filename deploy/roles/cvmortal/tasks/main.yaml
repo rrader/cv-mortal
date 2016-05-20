@@ -1,0 +1,30 @@
+- service: 'name=cvmortal state=stopped enabled=yes'
+  ignore_errors: yes
+
+- user: name=cvmortal state=present
+
+- name: Load source code
+  git: "repo=https://github.com/rrader/cv-mortal.git dest=/home/cvmortal/repo accept_hostkey=yes"
+
+- file: path=/home/cvmortal/repo state=directory owner=cvmortal recurse=yes
+
+- file: path=/home/cvmortal/repo state=directory owner='cvmortal' group='cvmortal'
+
+- apt: name=python3-pip state=present
+
+- pip: name=virtualenv executable=pip3
+- pip: requirements=/home/cvmortal/repo/requirements.txt virtualenv=/home/cvmortal/venv virtualenv_command=virtualenv virtualenv_python=python3
+
+- name: Add env file
+  template: 'src=cvmortal.env dest=/home/cvmortal/cvmortal.env mode=0644'
+
+- name: Add systemd unit
+  template: 'src=unit.service dest=/etc/systemd/system/cvmortal.service mode=0644'
+  register: unit_added
+
+- shell: systemctl daemon-reload
+  when: unit_added|changed
+
+- file: path=/home/cvmortal/static state=directory owner=cvmortal
+
+- service: 'name=cvmortal state=restarted enabled=yes'

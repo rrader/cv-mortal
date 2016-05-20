@@ -1,0 +1,16 @@
+# Mortal
+
+server {
+  listen 80 default;
+  server_name cvmortal.itkpi.pp.ua;
+
+  location /static {
+    alias /home/cvmortal/static;
+  }
+
+  location ^~ / {
+    proxy_pass http://127.0.0.1:8000/;
+    proxy_set_header Host $host;
+    add_header Access-Control-Allow-Origin *;
+  }
+}
