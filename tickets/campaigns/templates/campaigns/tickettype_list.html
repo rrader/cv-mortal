@@ -4,34 +4,46 @@
 {% block content %}
 <h1>Choose your donation :)</h1>
 <div class="row">
- {% for tickettype in object_list %}
-<div class="col col-xs-12 ticket">
-                <div class="row">
-                    <div class="col col-xs-6 ">
-                        <h3><b>{{tickettype.type}}</b></h3>
-                        <h5><b>{{tickettype.campaign.title}}</b></h5>
-                        <p>{{tickettype.campaign.description|safe}}</p>
-                        {% if tickettype.campaign.image %}
-                            <img style="height: 100px;" src="{{tickettype.campaign.image}}" />
-                        {% endif %}
-                    </div>
-                    <div class="col col-xs-2 ticket-info">
-                        <p>UAH {{tickettype.cost}}.</p>
-                    </div>
-                    <div class="col col-xs-4">
-<form action="{% url 'buy-ticket' tickettype.campaign.slug tickettype.id %}" method="POST" name="buy">
- {% csrf_token %}
-                        <button class="btn btn-primary" type="submit">Donate</button>
-</form>
-                    </div>
-                </div>
+    {%if form.errors%}
+    <div class="alert alert-danger">{{form.errors}}</div>
+    {%endif%}
+    <form method="POST" name="buy">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name">
+            <div class="checkbox">
+              <label><input type="checkbox" name="hide_name" value="True">Hide your name</label>
             </div>
+            <div class="checkbox">
+              <label><input type="checkbox" name="hide_money" value="True">Hide the amount of money</label>
+            </div>
+        </div>
+         {% for tickettype in object_list %}
+        <div class="col col-xs-12 ticket">
+                        <div class="row">
+                            <div class="col col-xs-6 ">
+                                <h3><b>{{tickettype.type}}</b></h3>
+                                <h5><b>{{tickettype.campaign.title}}</b></h5>
+                                <p>{{tickettype.campaign.description|safe}}</p>
+                                {% if tickettype.campaign.image %}
+                                    <img style="height: 100px;" src="{{tickettype.campaign.image}}" />
+                                {% endif %}
+                            </div>
+                            <div class="col col-xs-2 ticket-info">
+                                <p>UAH {{tickettype.cost}}.</p>
+                            </div>
+                            <div class="col col-xs-4">
+         {% csrf_token %}
+                                <button class="btn btn-primary" type="submit" name="submit" value="{{tickettype.id}}">Donate</button>
+                            </div>
+                        </div>
+                    </div>
 
-   {% empty %}
-    <h2>No ticket types available.</h2>
+           {% empty %}
+            <h2>No ticket types available.</h2>
+        </form>
 
-
-{% endfor %}   
-</div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

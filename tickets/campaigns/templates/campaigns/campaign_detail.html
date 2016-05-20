@@ -7,5 +7,15 @@
 <p>We have already collected: UAH {{campaign.collected}}!</p>
 <p>Our goal is: UAH {{campaign.goal}}</p>
 
+<p>Credits:</p>
+<ul>
+    {% for cart in credits %}
+    <li>
+        {%if cart.hide_name%}[name hidden]{%else%}{{cart.name}}{%endif%}
+        :
+        {%if cart.hide_money%}[amount of money is hidden]{%else%}{{cart.ticket_type.cost}}{%endif%}
+    </li>
+    {% endfor %}
+</ul>
 <a href="{% url 'tickettypes-for-campaign-list' campaign.slug %}" style="color:#666; font-weight: bold">Donate</a>
 {% endblock %}

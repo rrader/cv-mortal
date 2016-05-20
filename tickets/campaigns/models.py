@@ -50,6 +50,7 @@ class Cart(models.Model):
     TICKET_ISSUED = 'TICKET_ISSUED'
     PAYMENT_FAILED = 'PAYMENT_FAILED'
 
+    name = models.CharField(max_length=200, default='<noname>')
     uid = models.CharField(max_length=200, unique=True)
     timestamp = models.DateTimeField(auto_now=True)
     ticket_type = models.ForeignKey(TicketType)
@@ -59,6 +60,8 @@ class Cart(models.Model):
                                        (PAYMENT_FAILED, 'Payment failed'),
                               ))
     ticket = models.ForeignKey(IssuedTicket, null=True, default=None)
+    hide_money = models.BooleanField(default=False)
+    hide_name = models.BooleanField(default=False)
 
     def __str__(self):
         return self.uid
