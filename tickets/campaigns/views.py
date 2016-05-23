@@ -35,6 +35,7 @@ class BuyTicketForm(forms.Form):
     hide_money = forms.BooleanField(required=False)
     hide_name = forms.BooleanField(required=False)
     submit = forms.IntegerField()
+    something = forms.CharField()
 
 
 class TicketTypeListView(ListView, FormMixin):
