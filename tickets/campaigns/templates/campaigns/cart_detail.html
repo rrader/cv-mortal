@@ -24,7 +24,7 @@
     {%endif%}</p>
                     </div>
                     <div class="col col-xs-4">
-{%if cart.status == 'CREATED' or cart.status == 'PAYMENT_FAILED'%}
+{%if cart.status == 'CREATED' %}
 <div class="liqpay">
 {{liqpay_form|safe}}</div>
 {%endif%}
