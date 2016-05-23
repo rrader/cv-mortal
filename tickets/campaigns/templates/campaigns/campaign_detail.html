@@ -14,6 +14,7 @@
         {%if cart.hide_name%}[name hidden]{%else%}{{cart.name}}{%endif%}
         :
         {%if cart.hide_money%}[amount of money is hidden]{%else%}{{cart.ticket_type.cost}}{%endif%}
+        - "{{cart.something}}"
     </li>
     {% endfor %}
 </ul>

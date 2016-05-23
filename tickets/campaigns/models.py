@@ -62,6 +62,7 @@ class Cart(models.Model):
     ticket = models.ForeignKey(IssuedTicket, null=True, default=None)
     hide_money = models.BooleanField(default=False)
     hide_name = models.BooleanField(default=False)
+    something = models.CharField(max_length=200, default='<no text>')
 
     def __str__(self):
         return self.uid
