@@ -1,6 +1,3 @@
-- service: 'name=cvmortal state=stopped enabled=yes'
-  ignore_errors: yes
-
 - user: name=cvmortal state=present
 
 - name: Load source code
